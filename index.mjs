@@ -179,19 +179,40 @@ export async function execute_key_async(verb, url, token, json_string){
     var _url = url
     var opts = {}
     if (token) {
-        opts = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                "X-API-KEY": token,
-            },
+        if(json_string){
+            opts = {
+                method: verb,
+                body: json_string,
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-API-KEY": token,
+                },
+            }
+        }else{
+            opts = {
+                method: verb,
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-API-KEY": token,
+                },
+            }
         }
     } else {
-        opts = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
+        if(json_string){
+            opts = {
+                method: verb,
+                body: json_string,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        }else{
+            opts = {
+                method: verb,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
         }
     }
     const res = await fetch(url, opts).then(function (response) {
