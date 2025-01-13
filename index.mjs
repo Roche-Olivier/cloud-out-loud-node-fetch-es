@@ -1,4 +1,4 @@
-var fetch = require("node-fetch");
+import fetch from 'node-fetch'
 
 export async function execute_async(verb, url, token, json_string) {
     var _type = ""
